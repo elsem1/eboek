@@ -9,6 +9,7 @@ import (
 	"eboek/internal/sync"
 
 	"github.com/wailsapp/wails/v3/pkg/application"
+	_ "modernc.org/sqlite"
 )
 
 // Wails uses Go's `embed` package to embed the frontend files into the binary.
@@ -26,7 +27,7 @@ func main() {
 	// Variables 'Name' and 'Description' are for application metadata.
 	// 'Assets' configures the asset server with the 'FS' variable pointing to the frontend files.
 	// 'Bind' is a list of Go struct instances. The frontend has access to the methods of these instances.
-	store := storage.NewStore("~/.local/share/eboek/eboek.db")
+	store := storage.NewStore("")
 	client := cloud.NewClient(store)
 	engine := sync.NewEngine(client, store)
 
